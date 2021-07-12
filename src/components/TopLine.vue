@@ -33,8 +33,10 @@
             border: none!important;
             color: #213955!important;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             box-shadow: none!important;
+            font-weight: 600;
+            line-height: 16px;
         }
         .flex_wrapper{
             min-height: 40px;
