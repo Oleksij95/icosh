@@ -1,0 +1,39 @@
+$default-font: Inter, sans-serif;
+$accent: #18438B;
+$accent-color: #213955;
+$text: #565656;
+
+body.custom {
+    font-size: 16px;
+    min-width: 320px;
+    position: relative;
+    line-height: 1.65;
+    font-family: $default-font;
+    overflow-x: hidden;
+    color: $text;
+    input, textarea {
+        border: #666 1px solid;
+        outline: none;
+        &:focus:required:invalid {
+        border-color: red;
+        }
+        &:required:valid {
+        border-color: green;
+        }
+    }
+}
+.flex_wrapper{
+    display: flex;
+    &.flex_between{
+        justify-content: space-between
+    }
+    &.align_center{
+        align-items: center
+    }
+}
+
+@media (min-width: 1400px) {
+    body .container-xxl, body .container-xl, body .container-lg, body .container-md, body .container-sm, body .container {
+        max-width: 1140px;
+    }
+}
