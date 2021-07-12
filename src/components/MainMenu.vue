@@ -87,7 +87,26 @@
 </template>
 
 <script>
+	export default{
+        created() {
+            window.addEventListener('scroll', this.handleScroll);
+        },
+        
+        methods: {
+            handleScroll () {
+                let menu_wrapper = document.querySelector(".menu_wrapper");
+                 if (window.scrollY >= 40 ) {
+                    menu_wrapper.classList.add("fixed");
+                } else {
+                    menu_wrapper.classList.remove("fixed");
+                }
+            }
+        },
 
+        destroyed () {
+            window.removeEventListener('scroll', this.handleScroll);
+        }
+    }
 </script>
 
 <style lang="scss">
