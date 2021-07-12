@@ -15,7 +15,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="header_bottom_menu flex_wrapper flex_between align_center">
+		<VueSlickCarousel v-bind="sliderSettings" class="header_bottom_menu flex_wrapper flex_between align_center">
 			<span>охрана труда</span>
 			<span>опыт</span>
 			<span>тренинги</span>
@@ -26,15 +26,64 @@
 			<span>мировые практики</span>
 			<span>устойчивое развитие</span>
 			<span>цифровые решения</span>
-		</div>
+		</VueSlickCarousel>
 	</header>
 </template>
 
 <script>
 import MainMenu from '/src/components/MainMenu.vue'
+
+import VueSlickCarousel from 'vue-slick-carousel'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+// optional style for arrows & dots
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+
 export default{
+    data() {
+        return{
+            sliderSettings: {
+                autoplay: true,
+                arrows: false,
+                dots: false,
+                infinite: true,
+                slidesToShow: 9,
+                slidesToScroll: 1,
+                speed: 10000,
+                autoplaySpeed: 0,
+                cssEase: 'linear',
+                pauseOnHover: false,
+                responsive: [
+                    {
+                        breakpoint: 1600,
+                        settings: {
+                            slidesToShow: 4
+                        }
+                    },
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            }
+        }
+    },
     components: {
-        MainMenu
+        MainMenu,
+        VueSlickCarousel
     }
 }
 </script>
@@ -96,6 +145,7 @@ export default{
         }
         .header_bottom_menu{
             margin-top: 175px;
+            position: relative;
             span{
                 font-weight: normal;
                 font-size: 14px;
@@ -114,6 +164,7 @@ export default{
                 align-items: center;
                 justify-content: center;
                 outline: none;
+                font-weight: 500;
             }
         }
     }
