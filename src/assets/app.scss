@@ -251,6 +251,34 @@ section:not(#layout-content) a.more svg {
     margin-left: 10px;
 }
 
+
+.slider{
+	.slick-dots{
+		list-style: none;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		margin-top: 38px;
+		li{
+			width: 40px;
+			height: 2px;
+			background: #D0D0D0;
+			margin: 0;
+			&.slick-active{
+				background: $accent
+			}
+			button{
+				display: none;
+				content: "";
+				background: transparent;
+				border: none;
+			}
+		}
+	}
+}
+
 @media (min-width: 1400px) {
     body .container-xxl, body .container-xl, body .container-lg, body .container-md, body .container-sm, body .container {
         max-width: 1140px;

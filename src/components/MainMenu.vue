@@ -22,15 +22,12 @@
                                             <b-dropdown-item class="dropdown-item" href="#">Инновационные цифровые решения в охране труда (IT-услуги)</b-dropdown-item>
                                         </b-dropdown>
 									</li>
-
 									<li class="dropdown">
                                         <b-dropdown text="Обучение" class="" variant="primary">
                                             <b-dropdown-item class="dropdown-item" href="#">Some Link 1</b-dropdown-item>
                                             <b-dropdown-item class="dropdown-item" href="#">Some Link 2</b-dropdown-item>
                                         </b-dropdown>
 									</li>
-
-
 									<li>
 										<a href="#" class="border_link">Цены</a>
 									</li>
@@ -64,7 +61,6 @@
 										</a>
 									</li>
 								</ul>
-								
 								<div class="mob_menu_btn">
 									<div class="search"></div>
 									<div class="card_wrapper" data-toggle="modal" data-target="#card">
