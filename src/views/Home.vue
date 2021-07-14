@@ -4,6 +4,7 @@
     <WeSave></WeSave>
     <FreeConsultation></FreeConsultation>
     <StudyingPrograms></StudyingPrograms>
+    <OurServices></OurServices>
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import HomeHeader from '../components/headers/HomeHeader'
 import WeSave from '../components/WeSave.vue'
 import FreeConsultation from '../components/FreeConsultation.vue'
 import StudyingPrograms from '../components/StudyingPrograms.vue'
+import OurServices from '../components/OurServices'
 
 export default {
   name: 'Home',
@@ -20,7 +22,8 @@ export default {
     HomeHeader,
     WeSave,
     FreeConsultation,
-    StudyingPrograms
+    StudyingPrograms,
+    OurServices
   }
 }
 </script>
