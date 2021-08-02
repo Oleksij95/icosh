@@ -7,6 +7,7 @@
     <OurServices></OurServices>
     <TalkAboutUs></TalkAboutUs>
     <HomeFaq></HomeFaq>
+    <ConvincingStatistics></ConvincingStatistics>
   </div>
 </template>
 
@@ -19,6 +20,7 @@ import StudyingPrograms from '../components/StudyingPrograms.vue'
 import OurServices from '../components/OurServices'
 import TalkAboutUs from '../components/TalkAboutUs'
 import HomeFaq from '../components/HomeFaq.vue'
+import ConvincingStatistics from "../components/ConvincingStatistics.vue"
 
 export default {
   name: 'Home',
@@ -29,7 +31,8 @@ export default {
     StudyingPrograms,
     OurServices,
     TalkAboutUs,
-    HomeFaq
+    HomeFaq,
+    ConvincingStatistics
   }
 }
 </script>
