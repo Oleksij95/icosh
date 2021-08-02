@@ -65,12 +65,18 @@
                 </div>
             </div>
         </footer>
+
+        <MoveTop></MoveTop>
+        <CallbackFloat></CallbackFloat>
     </div>
 </template>
 
 <script>
     import PartnersBottomList from "../PartnersBottomList.vue"
     import FooterSocialList from "../FooterSocialList"
+    import CallbackFloat from "../CallbackFloat.vue"
+    import MoveTop from "../MoveTop.vue"
+
     export default{
         data() {
             return{
@@ -132,7 +138,9 @@
         },
         components: {
             PartnersBottomList,
-            FooterSocialList
+            FooterSocialList,
+            CallbackFloat,
+            MoveTop
         }
     }
 </script>
