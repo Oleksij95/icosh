@@ -8,6 +8,7 @@
     <TalkAboutUs></TalkAboutUs>
     <HomeFaq></HomeFaq>
     <ConvincingStatistics></ConvincingStatistics>
+    <FooterMain></FooterMain>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import OurServices from '../components/OurServices'
 import TalkAboutUs from '../components/TalkAboutUs'
 import HomeFaq from '../components/HomeFaq.vue'
 import ConvincingStatistics from "../components/ConvincingStatistics.vue"
+import FooterMain from "../components/footers/FooterMain.vue"
 
 export default {
   name: 'Home',
@@ -32,7 +34,8 @@ export default {
     OurServices,
     TalkAboutUs,
     HomeFaq,
-    ConvincingStatistics
+    ConvincingStatistics,
+    FooterMain
   }
 }
 </script>
