@@ -252,6 +252,86 @@ section:not(#layout-content) a.more svg {
 }
 
 
+
+
+.faq-content--item {
+	margin-bottom: 10px;
+}
+
+
+.faq-content--item.open .header{
+	background: #EAF6FF;
+}
+
+.faq-content--item .header {
+	background: #F8F8F8;
+	min-height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 6px;
+    padding: 0 30px;
+	cursor: pointer;
+	position: relative;
+	transition: all .4s;
+	border-bottom: 1px solid transparent;
+	&:hover{
+		background: #EAF6FF;
+	}
+	h3{
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 54px;
+		color: #262626;
+		margin: 0;
+		&::before{
+			content: "";
+			width: 20px;
+			height: 2px;
+			position: absolute;
+			background: #18438B;
+			right: 30px;
+			top: 49%;
+		}
+		&::after{
+			content: "";
+			height: 20px;
+			width: 2px;
+			position: absolute;
+			background: #18438B;
+			right: 39px;
+			top: 36%;
+			// transform: rotate(90deg);
+		}
+	}
+	
+}
+
+.faq-content--item .header[aria-expanded="true"]{
+	background: #EAF6FF;
+	border-radius: 6px 6px 0 0;
+	border-bottom: 1px solid #EEE8E8;
+}
+
+.faq-content--item .header[aria-expanded="true"]:after{
+	display: none;
+}
+
+.faq-content--item .header[aria-expanded="true"] ~ .body {
+	
+	box-shadow: 0px 4px 20px rgba(206, 206, 206, 0.25);
+}
+
+.faq-content--item .card-body{
+	padding: 17px 30px 24px 30px;
+	background: #FFFFFF;
+}
+
+.faq-content--item.open .header::after{
+	display: none;
+}
+
+
 .slider{
 	.slick-dots{
 		list-style: none;

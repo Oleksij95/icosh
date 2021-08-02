@@ -6,6 +6,7 @@
     <StudyingPrograms></StudyingPrograms>
     <OurServices></OurServices>
     <TalkAboutUs></TalkAboutUs>
+    <HomeFaq></HomeFaq>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import FreeConsultation from '../components/FreeConsultation.vue'
 import StudyingPrograms from '../components/StudyingPrograms.vue'
 import OurServices from '../components/OurServices'
 import TalkAboutUs from '../components/TalkAboutUs'
+import HomeFaq from '../components/HomeFaq.vue'
 
 export default {
   name: 'Home',
@@ -26,7 +28,8 @@ export default {
     FreeConsultation,
     StudyingPrograms,
     OurServices,
-    TalkAboutUs
+    TalkAboutUs,
+    HomeFaq
   }
 }
 </script>
