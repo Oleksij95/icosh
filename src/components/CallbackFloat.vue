@@ -1,5 +1,5 @@
 <template>
-    <div id="callback_float" v-click-outside="doSomething">
+    <div id="callback_float" v-click-outside="closeFloat">
         <div @click="showFlaotBodyFn(true)" class="callback_float_title_wrapper">
             <VueSlickCarousel class="callback_float_title_block" v-bind="sliderSettings">
                 <div class="">
@@ -101,7 +101,7 @@ import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
             showFlaotBodyFn(isShow) {
                 this.$store.dispatch('showFlaotBody', isShow);
             },
-            doSomething() {
+            closeFloat() {
                 this.$store.dispatch('showFlaotBody', false);
             }
         },
