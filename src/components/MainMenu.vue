@@ -32,17 +32,16 @@
 										<a href="#" class="border_link">Цены</a>
 									</li>
 									<li>
-										<a href="#" class="border_link">О нас</a>
+										<router-link to="about-us" tag="a" class="border_link">О нас</router-link>
 									</li>
 									<li>
 										<a href="#" class="border_link">Полезно знать</a>
 									</li>
 									<li>
-										<!-- <a href="/faq.html" class="border_link">Вопросы-ответы</a> -->
 										<router-link to="faq" class="border_link">Вопросы-ответы</router-link>
 									</li>
 									<li>
-										<a href="#" class="submit_application" data-toggle="modal" data-target="#leave_request">Оставить заявку</a>
+										<a class="submit_application" v-b-modal.leave_request>Оставить заявку</a>
 									</li>
 									<li class="color_wrapper">
 										<div class="search">
