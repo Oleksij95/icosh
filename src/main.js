@@ -33,7 +33,6 @@ Vue.directive('click-outside', {
   }
 });
 
-
 Vue.config.productionTip = false
 
 new Vue({

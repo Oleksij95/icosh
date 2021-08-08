@@ -97,32 +97,17 @@ import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
             }
         },
 
-        beforeMount: (el, binding) => {
-            el.clickOutsideEvent = event => {
-                if (!(el == event.target || el.contains(event.target))) {
-                    binding.value();
-                }
-            };
-            document.addEventListener("click", el.clickOutsideEvent);
-        },
-
-        unmounted: el => {
-            document.removeEventListener("click", el.clickOutsideEvent);
-        },
-
         methods: {
             showFlaotBodyFn(isShow) {
                 this.$store.dispatch('showFlaotBody', isShow);
             },
             doSomething() {
-                  this.$store.dispatch('showFlaotBody', false);
+                this.$store.dispatch('showFlaotBody', false);
             }
         },
-        
         components: {
             VueSlickCarousel
         }
-
     }
 </script>
 

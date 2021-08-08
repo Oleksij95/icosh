@@ -6,7 +6,7 @@
 					<div class="wrapper">
 						<h2>Бесплатная консультация!</h2>
 						<p>Есть вопросы? Оставьте заявку, и мы свяжемся с Вами <br> в ближайшее время удобным для вас способом</p>
-						<a href="#" class="accent_btn btn" data-toggle="modal" data-target="#leave_request">Оставить заявку</a>
+						<a class="accent_btn btn" v-b-modal.leave_request>Оставить заявку</a>
 					</div>
 				</div>
 			</div>
