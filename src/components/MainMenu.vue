@@ -5,9 +5,9 @@
 					<div class="col-12">
 						<div>
 							<nav class="flex_wrapper flex_between align_center">
-								<a href="/" class="logo">
+								<router-link to="/" tag="a">
 									<img src="/img/_src/logo.svg" alt="Logo">
-								</a>
+								</router-link>
 								<ul class="main_menu flex_wrapper flex_between align_center">
 									<li class="dropdown">
                                         <b-dropdown text="Услуги" class="" variant="primary">
@@ -38,7 +38,8 @@
 										<a href="#" class="border_link">Полезно знать</a>
 									</li>
 									<li>
-										<a href="/faq.html" class="border_link">Вопросы-ответы</a>
+										<!-- <a href="/faq.html" class="border_link">Вопросы-ответы</a> -->
+										<router-link to="faq" class="border_link">Вопросы-ответы</router-link>
 									</li>
 									<li>
 										<a href="#" class="submit_application" data-toggle="modal" data-target="#leave_request">Оставить заявку</a>
