@@ -359,6 +359,42 @@ section:not(#layout-content) a.more svg {
 	}
 }
 
+
+
+.tooltip_wrapper {
+	position: relative;
+	display: inline-block;
+	.tooltiptext_custom{
+		visibility: hidden;
+		width: 154px;
+		background-color: rgba(10, 10, 10, .75);
+		color: #fff;
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px 15px 7px 15px;
+		font-size: 12px;
+		line-height: 120%;
+		/* Position the tooltip */
+		position: absolute;
+		z-index: 1;
+		top: -85px;
+		left: -74px;
+		&::before{
+			content: "";
+			position: absolute;
+			left: 48%;
+			bottom: -17px;
+			border: 7px solid transparent;
+			border-top: 10px solid rgba(10, 10, 10, .75);;
+		}
+	}
+	&:hover{
+		.tooltiptext_custom{
+			visibility: visible;
+		}
+	}
+}
+
 @media (min-width: 1400px) {
     body .container-xxl, body .container-xl, body .container-lg, body .container-md, body .container-sm, body .container {
         max-width: 1140px;

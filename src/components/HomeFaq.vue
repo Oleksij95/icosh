@@ -91,7 +91,6 @@ export default{
 }
 .card-header {
     .btn{
-        padding: 0;
         outline: none;
         width: 100%;
         text-align: left;

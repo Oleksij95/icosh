@@ -26,12 +26,11 @@
 										</li>
 										<li class="dropdown">
 											<b-dropdown text="Обучение" class="" variant="primary">
-												<b-dropdown-item class="dropdown-item" href="#">Some Link 1</b-dropdown-item>
-												<b-dropdown-item class="dropdown-item" href="#">Some Link 2</b-dropdown-item>
+												<b-dropdown-item class="dropdown-item" href="#">Работа на высоте. Основы.</b-dropdown-item>
 											</b-dropdown>
 										</li>
 										<li>
-											<a href="#" class="border_link">Цены</a>
+											<router-link to="price" tag="a" class="border_link">Цены</router-link>
 										</li>
 										<li>
 											<router-link to="about-us" tag="a" class="border_link">О нас</router-link>
