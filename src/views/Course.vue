@@ -2,7 +2,7 @@
     <div class="one_cource_page">
         <MainMenu></MainMenu>
 
-        <header class="one_cource_page" style="background-image: url('/img/_src/one-coursec-bg-min.jpg');">
+        <header class="one_cource_page" :style="{ backgroundImage: `url('${course_bg}')` }">
             <div class="extra_menu">
                 <div class="container">
                     <div class="row">
@@ -218,6 +218,7 @@ export default{
 		return{
 			course_name: "",
 			course_formats: [],
+			course_bg: "",
 			pre_text: "",
 			course_for_content: "",
 			additional_benefits_content: "",
@@ -277,6 +278,7 @@ export default{
 		}).then((response) => {
 			return response.json();
 		}).then((data) => {
+			this.course_bg = data.course_bg
 			this.course_name = data.course_name
 			this.course_formats = data.course_formats
 			this.pre_text = data.pre_text
