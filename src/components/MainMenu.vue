@@ -26,20 +26,23 @@
 										</li>
 										<li class="dropdown">
 											<b-dropdown text="Обучение" class="" variant="primary">
-												<b-dropdown-item class="dropdown-item" href="#">Работа на высоте. Основы.</b-dropdown-item>
+												<b-dropdown-item class="dropdown-item" href="#">
+													<router-link to="/course/1-work-at-height-base">Работа на высоте. Основы.</router-link>
+												
+												</b-dropdown-item>
 											</b-dropdown>
 										</li>
 										<li>
-											<router-link to="price" tag="a" class="border_link">Цены</router-link>
+											<router-link to="/price/" tag="a" class="border_link">Цены</router-link>
 										</li>
 										<li>
-											<router-link to="about-us" tag="a" class="border_link">О нас</router-link>
+											<router-link to="/about-us/" tag="a" class="border_link">О нас</router-link>
 										</li>
 										<li>
 											<a href="#" class="border_link">Полезно знать</a>
 										</li>
 										<li>
-											<router-link to="faq" class="border_link">Вопросы-ответы</router-link>
+											<router-link to="/faq/" class="border_link">Вопросы-ответы</router-link>
 										</li>
 										<li>
 											<a class="submit_application" v-b-modal.leave_request>Оставить заявку</a>
@@ -202,7 +205,7 @@
     width: 100%;
     background: #D7EEFF;
     top: 0;
-    z-index: 1;
+    z-index: 11;
 	nav{
 		margin: 16px 0;
 	}
