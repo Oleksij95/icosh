@@ -77,7 +77,7 @@
                     <div class="row" v-if="!courseFormatNotAvailable">
                         <div class="col-lg-7" v-html="pre_text"></div>
                         <div class="col-lg-5">
-                            <CourseCalculator></CourseCalculator>
+                            <CourseCalculator :price=default_course_price :course_format=course_format @addBasketItem='addBasketItem'></CourseCalculator>
                         </div>
                     </div>
 
@@ -216,8 +216,10 @@ import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 export default{
 	data() {
 		return{
+			course_id: null,
 			course_name: "",
-			course_formats: [],
+			course_level: [],
+			course_format: [],
 			course_bg: "",
 			pre_text: "",
 			course_for_content: "",
@@ -229,6 +231,8 @@ export default{
 			training_options_content: [],
 			teachers_content: [],
 			extra_menu: [],
+			course_prices: [],
+			default_course_price: 0,
 			sliderSettings: {
 				dots: true,
 				arrows: true,
@@ -278,9 +282,10 @@ export default{
 		}).then((response) => {
 			return response.json();
 		}).then((data) => {
+			this.course_id = data.course_id
 			this.course_bg = data.course_bg
 			this.course_name = data.course_name
-			this.course_formats = data.course_formats
+			this.course_level = data.course_level
 			this.pre_text = data.pre_text
 			this.course_for_content = data.course_for_content
 			this.additional_benefits_content = data.additional_benefits_content
@@ -291,16 +296,34 @@ export default{
 			this.training_options_content = data.training_options_content
 			this.teachers_content = data.teachers_content
 			this.extra_menu = data.extra_menu
+			this.default_course_price = data.course_price[0].price
+			this.course_prices = data.course_price
+			this.course_format = data.course_formats
 		})
 	},
 	methods: {
 		changeCourseFormat(format = 'elementary'){
 			this.selectedCourseFormat = format
-			if (this.course_formats.indexOf(format) === -1) {
+			let course_level_price = this.course_prices.find(course_price => course_price.level_course === format)
+			if (course_level_price) {
+				this.default_course_price = course_level_price.price
+			}
+			if (this.course_level.indexOf(format) === -1) {
 				this.courseFormatNotAvailable = true
 			} else {
 				this.courseFormatNotAvailable = false
 			}
+		},
+		addBasketItem(data) {
+			let basketItem = {
+				course_id: this.course_id,
+				course_name: this.course_name,
+				course_price: data.price,
+				course_level: this.selectedCourseFormat,
+				course_format: data.selected_format,
+				course_count: data.courseCount
+			}
+			this.$store.dispatch('setBasketItem', basketItem);
 		}
 	},
     components: {
@@ -438,6 +461,11 @@ export default{
     background-position: 0 -80px;
     background-size: cover;
     height: auto;
+	.menu_wrapper{
+		&.fixed{
+			background: #d7eeff;
+		}
+	}
 }
 
 .one_cource_page_body{

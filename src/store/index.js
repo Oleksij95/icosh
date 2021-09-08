@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    basketItems: [],
     showFlaotBody: false,
     showSearch: false,
     trainingFormats: [
@@ -34,19 +35,31 @@ export default new Vuex.Store({
     showFlaotBody(state, value){
       state.showFlaotBody = value
     },
+
     showSearch(state, value){
       state.showSearch = value
+    },
+
+    setBasketItem(state, value) {
+      state.basketItems.push(value)
     }
+
   },
   actions: {
     showFlaotBody({commit}, value){
       commit('showFlaotBody', value)
     },
+
     showSearch({commit}, value){
       commit('showSearch', value)
+    },
+
+    setBasketItem({commit}, item){
+      commit("setBasketItem", item)
     }
   },
   getters: {
+    basketCount: s => s.basketItems.length,
     showFlaotBody: s => s.showFlaotBody,
     showSearch: s => s.showSearch,
     trainingFormats: s => s.trainingFormats

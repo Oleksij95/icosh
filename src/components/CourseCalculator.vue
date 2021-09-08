@@ -11,42 +11,64 @@
                     </div>
                 </label>
                 
-                <Select2 name="teaching_method" id="teaching_method" v-model="user_count_format_select_options_default" :options="user_count_format_select_options" :settings="{ placeholder: 'онлайн дистанционное ' }" />
+                <Select2 name="teaching_method" id="teaching_method" v-model="selected_format" :options="course_format" :settings="{ placeholder: 'онлайн дистанционное ' }" />
 
             </div>
 
             <div class="field_litem last_item">
                 <label for="people_count">Выберите количество ученников</label>
                 <div class="count_imput_wrp">
-                    <span class="minus">
+                    <span class="minus" @click="changeQuantity('minus')">
                         <svg width="14" height="3" viewBox="0 0 14 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13 2.1H13.1V2V1V0.9H13H1H0.9V1V2V2.1H1H13Z" fill="#B5B5B5" stroke="#B5B5B5" stroke-width="0.2"/>
                         </svg>
                     </span>
-                    <input type="text" value="1" class="people_count" name="people_count" id="people_count">
-                    <span class="plus">
+                    <input type="text" :value="quantity" class="people_count" name="people_count" id="people_count">
+                    <span class="plus" @click="changeQuantity('plus')">
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6.57142 0.9H6.47142V1V6.47143H1H0.9V6.57143V7.42857V7.52857H1H6.47142V13V13.1H6.57142H7.42856H7.52856V13V7.52857H13H13.1V7.42857V6.57143V6.47143H13H7.52856V1V0.9H7.42856H6.57142Z" fill="#213955" stroke="#213955" stroke-width="0.2"/>
                         </svg>
                     </span>
                 </div>
             </div>
-            <div id="price"><span>799</span> грн.</div>
-            <button type="submit" class="add_to_card">Добавить в корзину</button>
+            <div id="price"><span>{{ recountPrice }}</span> грн.</div>
+            <button type="submit" class="add_to_card" @click.prevent="addBasketItem">Добавить в корзину</button>
         </form>
     </div>
 </template>
 
 <script>
 import Select2 from 'v-select2-component';
-
 export default {
+	props: ["price", "course_format"],
     data() {
         return{
-            user_count_format_select_options: ['онлайн дистанционное ', 'онлайн живое ', 'онлайн смешанное', 'обучение на предприятии' , 'обучение в тренинг центрах'],
-			user_count_format_select_options_default: 'онлайн дистанционное'
+			selected_format: "",
+            quantity: 1,
         }
     },
+	methods: {
+		changeQuantity(action) {
+			if (action === 'plus') {
+				this.quantity++
+			}
+			if (action === 'minus' && this.quantity > 1) {
+				this.quantity--
+			}
+		},
+		addBasketItem() {
+			this.$emit('addBasketItem', {
+				price: this.recountPrice,
+				courseCount: this.quantity,
+				selected_format: this.selected_format
+			})
+		}
+	},
+	computed: {
+		recountPrice(){
+			return this.quantity * this.price
+		}
+	},
     components: {
         Select2
     }
