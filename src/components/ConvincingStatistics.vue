@@ -17,7 +17,7 @@
 					<div class="submit_btn_rapper hide_tablet">
 						<p>Не хотите становиться частью этой статистики? <br>
 							Давайте сделаем работу безопаснее вместе!</p>
-							<a href="#" class="accent_btn btn" data-toggle="modal" data-target="#leave_request">Оставить заявку</a>
+							<a class="accent_btn btn" v-b-modal.leave_request>Оставить заявку</a>
 					</div>
 				</div>
 				<div class="col-lg-6 col-12 order-1 order-md-2">
@@ -37,7 +37,7 @@
 					<div class="submit_btn_rapper only_tablet">
 						<p>Не хотите становиться частью этой статистики? <br>
 							Давайте сделаем работу безопаснее вместе!</p>
-							<a href="#" class="accent_btn btn" data-toggle="modal" data-target="#leave_request">Оставить заявку</a>
+							<a class="accent_btn btn" v-b-modal.leave_request>Оставить заявку</a>
 					</div>
 				</div>
 			</div>

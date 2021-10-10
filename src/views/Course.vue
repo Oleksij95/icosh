@@ -2,12 +2,12 @@
     <div class="one_cource_page">
         <MainMenu></MainMenu>
 
-        <header class="one_cource_page" :style="{ backgroundImage: `url('${course_bg}')` }">
+        <header class="one_cource_page" :style="{ backgroundImage: `url('${this.$store.getters.course.course_bg}')` }">
             <div class="extra_menu">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <ExtraMenus :extra_menu=extra_menu v-if="extra_menu.length > 0"></ExtraMenus>
+                            <ExtraMenus :extra_menu=this.$store.getters.course.extra_menu v-if="this.$store.getters.course.extra_menu && this.$store.getters.course.extra_menu.length > 0"></ExtraMenus>
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <BreadCrumbs></BreadCrumbs>
                     <div class="row">
                         <div class="col-md-12">
-                            <h1>{{ course_name }}</h1>
+                            <h1>{{ this.$store.getters.course.course_name }}</h1>
                             <div class="levels_select_wrapper">
                                 <div class="top_part">
                                     <p>Выберите уровень обучения:</p>
@@ -31,28 +31,28 @@
                                     <div
 										class="tab"
 										:class="{active: selectedCourseFormat === 'elementary'}"
-										@click="changeCourseFormat('elementary')"
+										@click="changeCourseLevel('elementary')"
 										>
 										Начальный
 									</div>
                                     <div
 										class="tab"
 										:class="{active: selectedCourseFormat === 'base'}"
-										@click="changeCourseFormat('base')"
+										@click="changeCourseLevel('base')"
 										>
 										Основной
 									</div>
                                     <div
 										class="tab"
 										:class="{active: selectedCourseFormat === 'advanced'}"
-										@click="changeCourseFormat('advanced')"
+										@click="changeCourseLevel('advanced')"
 										>
 										Продвинутый
 									</div>
                                     <div
 										class="tab"
 										:class="{active: selectedCourseFormat === 'expert'}"
-										@click="changeCourseFormat('expert')"
+										@click="changeCourseLevel('expert')"
 									>
 										Экспертный
 									</div>
@@ -75,9 +75,14 @@
                     </div>
 
                     <div class="row" v-if="!courseFormatNotAvailable">
-                        <div class="col-lg-7" v-html="pre_text"></div>
+                        <div class="col-lg-7" v-html="this.$store.getters.course.pre_text"></div>
                         <div class="col-lg-5">
-                            <CourseCalculator :price=default_course_price :course_format=course_format @addBasketItem='addBasketItem'></CourseCalculator>
+                            <CourseCalculator 
+								:price=default_course_price 
+								:selectedCourseFormat=selectedCourseFormat
+								@addBasketItem='addBasketItem'
+							>
+							</CourseCalculator>
                         </div>
                     </div>
 
@@ -86,34 +91,34 @@
 
                             <div id="course_for" class="divider_block extra_menu_item">
                                 <h3>Курс предназначен для:</h3>
-								<div v-html="course_for_content"></div>
+								<div v-html="this.$store.getters.course.course_for_content"></div>
                             </div>
 
 
                             <div id="additional_benefits" class="divider_block extra_menu_item">
                                 <h3>Зачем мне этот курс? Основные выгоды.</h3>
-                                <div v-html="additional_benefits_content"></div>
+                                <div v-html="this.$store.getters.course.additional_benefits_content"></div>
                             </div>
 
                             <div id="course_description" class="divider_block extra_menu_item">
                                 <h3>Описание курса</h3>
-                                <div v-html="course_description"></div>
+                                <div v-html="this.$store.getters.course.course_description"></div>
 
                                 <div class="cource_cta_banner">
                                     <p>Попробуйте курс ICOSH <span>Работы на высоте</span>
                                         с помощью нашей цифровой платформы</p>
-                                    <a href="#" class="accent_btn btn" data-toggle="modal" data-target="#leave_request">Оставить заявку</a>
+                                    <a class="accent_btn btn" v-b-modal.leave_request>Оставить заявку</a>
                                 </div>
                             </div>
 
                             <div id="assessment_of_knowledge" class="divider_block extra_menu_item">
                                 <h3>Оценка полученных знаний</h3>
-								<div v-html="assessment_of_knowledge_content"></div>
+								<div v-html="this.$store.getters.course.assessment_of_knowledge_content"></div>
                             </div>
 
                             <div id="what_will_i_learn" class="divider_block extra_menu_item">
                                 <h3>Чему я научусь?</h3>
-                                <div v-html="what_will_i_learn_content"></div>
+                                <div v-html="this.$store.getters.course.what_will_i_learn_content"></div>
                                 <div class="btn_block">
                                     <p>Если у Вас остались --вопросы о том, что это за обучение смотрите:</p>
                                     <div class="btn_wrp">
@@ -125,7 +130,7 @@
 
                             <div class="divider_block extra_menu_item">
                                 <h3>Дополнительные выгоды</h3>
-                                <div class="benefits_slider" v-if="benefits_content.length > 0">
+                                <div class="benefits_slider" v-if="this.$store.getters.course.benefits_content && this.$store.getters.course.benefits_content.length > 0">
 									<VueSlickCarousel v-bind="sliderSettings">
 
 										<template #prevArrow="">
@@ -134,7 +139,7 @@
 											</div>
 										</template>
 
-										<div class="benefit_slide" v-for="(benefits, index) in benefits_content" :key="index">
+										<div class="benefit_slide" v-for="(benefits, index) in this.$store.getters.course.benefits_content" :key="index">
 											<p>{{ benefits }}</p>
 										</div>
 
@@ -151,7 +156,7 @@
                             <div id="training_options" class="divider_block extra_menu_item">
                                 <h3>Доступные варианты обучения для этого курса</h3>
 
-								<b-card no-body class="faq-content--item" v-for="(variable, index) in training_options_content" :key="index">
+								<b-card no-body class="faq-content--item" v-for="(variable, index) in this.$store.getters.course.training_options_content" :key="index">
 									<b-card-header header-tag="div" class="no_style_header" role="tab">
 										<b-button block v-b-toggle="'accordion-' + index" variant="none" tag="p" class="accordion_title">{{ variable.option_name }}</b-button>
 									</b-card-header>
@@ -168,7 +173,7 @@
                                 <div id="teachers" class="teachers extra_menu_item">
                                     <h3>Кто преподаёт курс. Наши эксперты и тренеры</h3>
 
-                                    <div class="teachers_wrapper" v-for="(teacher, index) in teachers_content" :key="index">
+                                    <div class="teachers_wrapper" v-for="(teacher, index) in this.$store.getters.course.teachers_content" :key="index">
                                         <div class="teacher">
                                             <div class="tex_info_wrapper">
                                                 <p class="name">{{ teacher.teacher_name }}</p>
@@ -220,19 +225,10 @@ export default{
 			course_name: "",
 			course_level: [],
 			course_format: [],
-			course_bg: "",
-			pre_text: "",
-			course_for_content: "",
-			additional_benefits_content: "",
-			course_description: "",
-			assessment_of_knowledge_content: "",
-			what_will_i_learn_content: "",
-			benefits_content: [],
-			training_options_content: [],
-			teachers_content: [],
-			extra_menu: [],
 			course_prices: [],
+			formats_to_level: null,
 			default_course_price: 0,
+			pre_img: "",
 			sliderSettings: {
 				dots: true,
 				arrows: true,
@@ -270,11 +266,11 @@ export default{
 					}
 				]
             },
-			selectedCourseFormat: "elementary",
+			selectedCourseFormat: "",
 			courseFormatNotAvailable: false
 		}
 	},
-	async beforeMount() {
+	async created() {
 		await fetch('/courses.json', {
 			headers: {
 				'Content-Type': 'application/json'
@@ -282,48 +278,72 @@ export default{
 		}).then((response) => {
 			return response.json();
 		}).then((data) => {
-			this.course_id = data.course_id
-			this.course_bg = data.course_bg
-			this.course_name = data.course_name
-			this.course_level = data.course_level
-			this.pre_text = data.pre_text
-			this.course_for_content = data.course_for_content
-			this.additional_benefits_content = data.additional_benefits_content
-			this.course_description = data.course_description
-			this.assessment_of_knowledge_content = data.assessment_of_knowledge_content
-			this.what_will_i_learn_content = data.what_will_i_learn_content
-			this.benefits_content = data.benefits_content
-			this.training_options_content = data.training_options_content
-			this.teachers_content = data.teachers_content
-			this.extra_menu = data.extra_menu
-			this.default_course_price = data.course_price[0].price
-			this.course_prices = data.course_price
-			this.course_format = data.course_formats
+			let course_property = {}
+			for(let key in data){
+				course_property[key] = data[key]
+			}
+			this.$store.dispatch("setCourse", course_property);
+			this.$store.dispatch('setSelectedFormat', this.$store.getters.course.formats_to_level[Object.keys(this.$store.getters.course.formats_to_level)[0]][0])
 		})
 	},
 	methods: {
-		changeCourseFormat(format = 'elementary'){
+		changeCourseLevel(format = 'elementary'){
 			this.selectedCourseFormat = format
-			let course_level_price = this.course_prices.find(course_price => course_price.level_course === format)
+			let course_level_price = this.$store.getters.course.course_price.find(course_price => course_price.level_course === format)
 			if (course_level_price) {
 				this.default_course_price = course_level_price.price
 			}
-			if (this.course_level.indexOf(format) === -1) {
+			if (this.$store.getters.course.course_level.indexOf(format) === -1) {
 				this.courseFormatNotAvailable = true
 			} else {
 				this.courseFormatNotAvailable = false
 			}
+
+			if (this.$store.getters.course.formats_to_level[format][0]) {
+				this.$store.dispatch('setSelectedFormat', this.$store.getters.course.formats_to_level[format][0])
+			} else {
+				this.$store.dispatch('setSelectedFormat', this.$store.getters.course.formats_to_level[Object.keys(this.$store.getters.course.formats_to_level)[0]][0])
+			}
+
+			// console.log("course: ", 	this.selectedCourseFormat)
 		},
 		addBasketItem(data) {
 			let basketItem = {
-				course_id: this.course_id,
-				course_name: this.course_name,
+				course_id: this.$store.getters.course.course_id,
+				course_name: this.$store.getters.course.course_name,
 				course_price: data.price,
+				course_default_prices: this.$store.getters.course.course_price,
+				course_levels: this.$store.getters.course.course_levels,
 				course_level: this.selectedCourseFormat,
-				course_format: data.selected_format,
-				course_count: data.courseCount
+				course_format: this.course_format,
+				selected_format: data.selected_format,
+				course_count: data.courseCount,
+				course_pre_img: this.$store.getters.course.pre_img,
+				formats_to_level: this.$store.getters.course.formats_to_level
 			}
 			this.$store.dispatch('setBasketItem', basketItem);
+		}
+	},
+	computed: {
+		selectedCourseLevel: function(){
+			return this.$store.getters.course.course_level;
+		},
+
+		defaultCoursePrice: function() {
+			return this.$store.getters.course.course_price;
+		},
+		
+		defaultCourseFormat: function() {
+			return this.$store.getters.course.selectedFormat;
+		}
+	},
+	watch: {
+		selectedCourseLevel() {
+			this.selectedCourseFormat = this.selectedCourseLevel[0]
+		},
+
+		defaultCoursePrice() {
+			this.default_course_price = this.defaultCoursePrice[0].price
 		}
 	},
     components: {
@@ -339,13 +359,11 @@ export default{
 </script>
 
 <style lang='scss'>
-
 .card{
 	border: none;
 	outline: none;
 	border: none;
 	border-bottom: 1px solid #d2e3ee;
-	margin-bottom: 0;
 	.card-body{
 		padding-left: 0;
 	}

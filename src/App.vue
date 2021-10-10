@@ -5,12 +5,14 @@
     <router-view />
 
     <LeaveQuestion></LeaveQuestion>
+    <Card></Card>
   </div>
 </template>
 
 <script>
   import TopLine from './components/TopLine.vue'
   import LeaveQuestion from './components/LeaveQuestion.vue'
+  import Card from './components/Modals/Basket.vue'
  
   export default{
     methods: {
@@ -24,7 +26,8 @@
     },
     components: {
       TopLine,
-      LeaveQuestion
+      LeaveQuestion,
+      Card
     }
   }
 

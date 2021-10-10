@@ -1,17 +1,23 @@
 <template>
-    <div class="card_wrapper">
+    <div class="card_wrapper" >
         <p class="title">Закажите курс сейчас:</p>
         <form action="" id="add_cource_form">
             <div class="field_litem no_select">
                 <label for="teaching_method">
                     Выберите формат обучения
-                    <div class="tooltip_wrapper info_icon">
+                    <div class="tooltip_wrapper info_icon" v-if="this.$store.getters.course.formats_to_level && this.$store.getters.course.formats_to_level[selectedCourseFormat].length === 1">
                         <img src="/img/_src/info-icon.svg" alt="info">
                         <span class="tooltiptext_custom">Курс этого уровня обучения доступен только в таком формате.</span>
                     </div>
                 </label>
-                
-                <Select2 name="teaching_method" id="teaching_method" v-model="selected_format" :options="course_format" :settings="{ placeholder: 'онлайн дистанционное ' }" />
+
+				<div v-if="this.$store.getters.course.formats_to_level">
+					<select name="course_format" id="course_format" @change="changeFormat">
+						<option value="" v-for="(item, index) in this.$store.getters.course.formats_to_level[selectedCourseFormat]" :key="index">
+							{{ item }}
+						</option>
+					</select>
+				</div>
 
             </div>
 
@@ -38,15 +44,16 @@
 </template>
 
 <script>
-import Select2 from 'v-select2-component';
 export default {
-	props: ["price", "course_format"],
+	props: ["price", "selectedCourseFormat"],
     data() {
         return{
 			selected_format: "",
             quantity: 1,
+			formats_to_level: {},
+			placeholderSelect: ""
         }
-    },
+    }, 
 	methods: {
 		changeQuantity(action) {
 			if (action === 'plus') {
@@ -56,137 +63,143 @@ export default {
 				this.quantity--
 			}
 		},
+		changeFormat(e) {
+			this.selected_format = e.target.options[e.target.selectedIndex].text
+			this.$store.dispatch('setSelectedFormat', this.selected_format)
+		},
 		addBasketItem() {
 			this.$emit('addBasketItem', {
 				price: this.recountPrice,
 				courseCount: this.quantity,
-				selected_format: this.selected_format
+				selected_format: this.$store.getters.selectedFormat,
+				formats_to_level: this.formats_to_level,
 			})
 		}
 	},
 	computed: {
 		recountPrice(){
 			return this.quantity * this.price
-		}
+		},
+		
 	},
-    components: {
-        Select2
-    }
+	watch: {
+	
+	},
 }
 </script>
 
 <style lang="scss" scoped>
 .card_wrapper{
-		background: #FFFFFF;
-		box-shadow: 0px 4px 20px rgba(167, 167, 167, 0.2);
-		border-radius: 6px;
-		padding: 20px 40px 25px 40px;
-		.title{
-			font-weight: 600;
-			font-size: 18px;
-			line-height: 46px;
-			text-align: center;
-			color: #262626;
-			margin-bottom: 20px;
+	background: #FFFFFF;
+	box-shadow: 0px 4px 20px rgba(167, 167, 167, 0.2);
+	border-radius: 6px;
+	padding: 20px 40px 25px 40px;
+	.title{
+		font-weight: 600;
+		font-size: 18px;
+		line-height: 46px;
+		text-align: center;
+		color: #262626;
+		margin-bottom: 20px;
+	}
+	.field_litem{
+		margin-bottom: 22px;
+		&.last_item{
+			margin-bottom: 12px;
 		}
-		.field_litem{
-			margin-bottom: 22px;
-			&.last_item{
-				margin-bottom: 12px;
-			}
-			&.no_select{
-				.select2-selection__arrow{
-					opacity: 0;
-				}
-			}
-		}
-		label{
-			font-weight: 300;
-			font-size: 12px;
-			line-height: 16px;
-			letter-spacing: 0.01em;
-			color: #7E858E; 
-			display: block;
-			margin-bottom: 2px;
-		}
-		select{
-			width: 100%;
-			border: 1px solid #D7DFE9;
-			box-sizing: border-box;
-			border-radius: 2px;
-			height: 44px;
-			padding: 0 16px;
-		}
-		#price{
-			font-weight: 500;
-			font-size: 19px;
-			line-height: 54px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: #262626;
-			span{
-				padding-right: 4px;
-			}
-		}
-		.info_icon{
-			cursor: pointer;
-			vertical-align: 1px;
-			margin-left: 1px;
-		}
-		.count_imput_wrp{
-			background: #FFFFFF;
-			border: 1px solid #D7DFE9;
-			box-sizing: border-box;
-			border-radius: 2px;
-			height: 44px;
-			display: flex;
-			align-items: center;
-			padding: 0 16px;
-			input{
-				border: none;
-				width: 200px;
-				text-align: center;
-			}
-			span{
-				min-width: 20px;
-				display: block;
-				cursor: pointer;
-				color: #213955;
-				display: flex;
-				align-items: center;
-				height: 100%;
-				&.can_minus{
-					svg, path{
-						fill: #213955;
-					}
-				}
-			}
-		}
-
-		
-		.add_to_card{
-			background: url("/img/_src/cart-white.svg"), #18438B;
-			background-repeat: no-repeat;
-			background-position: 20px 50%;
-			box-shadow: 0px 4px 10px rgba(188, 201, 210, 0.15);
-			border-radius: 6px;
-			height: 54px;
-			font-size: 16px;
-			line-height: 54px;
-			width: 100%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: #fff;
-			border: none;
-			cursor: pointer;
-			transition: all .4s;
-			&:hover{
-				background: url("/img/_src/cart-white.svg"), #1c52ad;
-				background-position: 20px 50%;
-				background-repeat: no-repeat;
+		&.no_select{
+			.select2-selection__arrow{
+				opacity: 0;
 			}
 		}
 	}
+	label{
+		font-weight: 300;
+		font-size: 12px;
+		line-height: 16px;
+		letter-spacing: 0.01em;
+		color: #7E858E; 
+		display: block;
+		margin-bottom: 2px;
+	}
+	select{
+		width: 100%;
+		border: 1px solid #D7DFE9;
+		box-sizing: border-box;
+		border-radius: 2px;
+		height: 44px;
+		padding: 0 16px;
+	}
+	#price{
+		font-weight: 500;
+		font-size: 19px;
+		line-height: 54px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #262626;
+		span{
+			padding-right: 4px;
+		}
+	}
+	.info_icon{
+		cursor: pointer;
+		vertical-align: 1px;
+		margin-left: 1px;
+	}
+	.count_imput_wrp{
+		background: #FFFFFF;
+		border: 1px solid #D7DFE9;
+		box-sizing: border-box;
+		border-radius: 2px;
+		height: 44px;
+		display: flex;
+		align-items: center;
+		padding: 0 16px;
+		input{
+			border: none;
+			width: 200px;
+			text-align: center;
+		}
+		span{
+			min-width: 20px;
+			display: block;
+			cursor: pointer;
+			color: #213955;
+			display: flex;
+			align-items: center;
+			height: 100%;
+			&.can_minus{
+				svg, path{
+					fill: #213955;
+				}
+			}
+		}
+	}
+
+		
+	.add_to_card{
+		background: url("/img/_src/cart-white.svg"), #18438B;
+		background-repeat: no-repeat;
+		background-position: 20px 50%;
+		box-shadow: 0px 4px 10px rgba(188, 201, 210, 0.15);
+		border-radius: 6px;
+		height: 54px;
+		font-size: 16px;
+		line-height: 54px;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+		border: none;
+		cursor: pointer;
+		transition: all .4s;
+		&:hover{
+			background: url("/img/_src/cart-white.svg"), #1c52ad;
+			background-position: 20px 50%;
+			background-repeat: no-repeat;
+		}
+	}
+}
 </style>
